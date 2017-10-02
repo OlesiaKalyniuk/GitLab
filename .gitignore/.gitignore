@@ -1,0 +1,287 @@
+package lab1;
+
+import java.util.Arrays;
+
+public class Variant13 {
+
+    private static final float PI= 3.14f;
+
+    public static class Square{
+        private float S1;
+        private float S2;
+        private float S3;
+
+        public void setS1(float S1){
+            this.S1 = S1;
+        }
+
+        public void setS2(float S2){
+            this.S2 = S2;
+        }
+
+        public void setS3(float S3){
+            this.S3 = S3;
+        }
+
+        public float getS1(){
+            return S1;
+        }
+
+        public float getS2(){
+            return S2;
+        }
+
+        public float getS3(){
+            return S3;
+        
+            
+        }
+        
+       
+		public boolean equals (Object other){
+        	Square ob = (Square)other;
+			return ((S1 == ob.S1)&&(S2 == ob.S2) && (S3 == ob.S3));
+		}
+    }
+
+    public static  class Sum{
+        private float sum;
+        private int count;
+
+        public void setSum(float sum) {
+            this.sum = sum;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public float getSum() {
+            return sum;
+        }
+
+        public int getCount() {
+            return count;
+           
+        }
+        
+        
+		public boolean equals (Object other){
+        	Sum ob = (Sum)other;
+			return ((sum == ob.sum) && (count == ob.count));
+		}
+    }
+
+    public static class Triangle{
+        private float a, h, c, S;
+
+        public void setA(float a) {
+            this.a = a;
+        }
+
+        public void setC(float c) {
+            this.c = c;
+        }
+
+        public void setH(float h) {
+            this.h = h;
+        }
+
+        public void setS(float s) {
+            S = s;
+        }
+
+        public float getA() {
+            return a;
+        }
+
+        public float getH() {
+            return h;
+        }
+
+        public float getC() {
+            return c;
+        }
+
+        public float getS() {
+            return S;
+        }
+        
+      
+		public boolean equals (Object other){
+        	Triangle ob = (Triangle)other;
+			return ((a == ob.a) && (h == ob.h) && (c == ob.c) && (S == ob.S));
+        }
+    }
+
+    public static class Array{
+        private int[] index;
+        private int length;
+
+        public void setIndex(int[] index) {
+            this.index = index;
+        }
+
+        public void setLength(int length) {
+            this.length = length;
+        }
+
+        public int[] getIndex() {
+            return index;
+        }
+
+        public int getLength() {
+            return length;
+        }
+        
+     
+		public boolean equals (Object other){
+        	boolean b = true;
+			Array dj = (Array)other;
+			for(int i = 0; i < this.length; i ++)
+				if(index[i] != dj.index[i])
+				{
+					b = false;
+					break;
+				}
+			return ((b) && (length == dj.length));
+		}
+    }
+
+    public Square beginTask(float R1, float R2){
+    	if(R1<R2||R1<0||R2<0) {
+    		throw new AssertionError("Wrong");
+    	}
+        Square result = new Square();
+        result.setS1(Math.round(PI * R1 * R1 * 100.0f) / 100.0f);
+        result.setS2(Math.round(PI * R2 * R2 * 100.0f) / 100.0f);
+        result.setS3((Math.round(PI* R1 * R1 * 100.0f) / 100.0f) - (Math.round(PI * R2 * R2 * 100.0f) / 100.0f));
+
+        result.getS1();
+        result.getS2();
+        result.getS3();
+
+        return result;
+
+    }
+
+    public int integerTask(int  number){
+    	if(number<100||number>999) {
+    		throw new AssertionError("Wrong");
+    	}
+        int left = (int)number/100;
+        number -= left * 100;
+        number = number * 10 + left;
+        return number;
+    }
+
+    public boolean booleanTask(int A, int B, int C){
+        return ((A > 0) || (B > 0) || (C > 0));
+    }
+
+    public  float ifTask(float A, float B, float C){
+        if ((A > B) && (A < C) || (A < B) && (A > C) ) return A;
+        if ((B > A) && (B < C) || (B < A) && (B > C) ) return B;
+        else return C;
+
+    }
+
+    public static Triangle caseTask(int n, float value){
+        Triangle triangle = new Triangle();
+        float a = 0, h = 0, c = 0, S = 0;
+        switch (n){
+            case 1:
+                a = value;
+                c = (float)(a * Math.sqrt(2));
+                h = c / 2;
+                S = c * h / 2;
+                break;
+            case 2:
+                c = value;
+                a = (float)(c / Math.sqrt(2));
+                h = c / 2;
+                S = c * h / 2;
+                break;
+            case 3:
+                h = value;
+                c = h * 2;
+                a = (float)(c / Math.sqrt(2));
+                S = c * h / 2;
+                break;
+            case 4:
+                S = value;
+                a = (float)Math.sqrt(2*S);
+                c = (float)(a * Math.sqrt(2));
+                h = c / 2;
+        }
+        triangle.setA(a);
+        triangle.setC(c);
+        triangle.setH(h);
+        triangle.setS(S);
+        return triangle;
+    }
+
+    public float forTask(int N){
+        assert (N > 0): "Argument N should be more than 0";
+        float result = 0;
+        float a = 1.1f;
+        for(int i = 0; i < N; i ++){
+        	if (i %2 == 1)result -= a;
+        	else result += a;
+            a += 0.1;
+        }
+        result = Math.round(result * 100.0f) / 100.0f;
+        return result;
+    }
+
+    public Sum whileTask(float A){
+        Sum result = new Sum();
+        assert (A >= 1): "Argument A should be more than 1";
+        float sum = 0;
+        int K = 1;
+        while (sum < A){
+            sum += 1.0f/K;
+            K++;
+        }
+        sum = Math.round(sum * 100.0f) / 100.0f;
+        result.setSum(sum);
+        result.setCount(K-1);
+
+        return result;
+    }
+
+    public Array arrayTask(float[] arr, int N){
+        Array array = new Array();
+        int[] index = new int[N];
+        int k = 0;
+        for(int i = 0; i < N-1; i ++){
+            if(arr[i] > arr[i+1]){
+                index[k] = i;
+                k++;
+            }
+        }
+        array.setIndex(index);
+        array.setLength(k);
+        return array;
+    }
+
+    public static float[][] matrixTask(float[][] matrix, int n, int m){
+        float temp;
+        if(n % 2 == 1) n--;
+        for(int i = 0, k = n - 1; i < n/2   ; i ++, k --){
+            for(int j = 0; j < m; j ++){
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[k][j];
+                matrix[k][j] = temp;
+            }
+        }
+        return matrix;
+    }
+
+    public static void main(String... strings) {
+        System.out.println("Start of first lab");
+        System.out.println("Done!");   
+        }
+}
+
+
